@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mar 💘</title>
+  <style>
+    :root{
+      --bg1:#ffd1e8;
+      --bg2:#ffeef7;
+      --card:#ffffffcc;
+      --text:#1b1b1b;
+      --pink:#ff3d7f;
+      --pink2:#ff7ab1;
+      --shadow: 0 20px 60px rgba(0,0,0,.12);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background: radial-gradient(1200px 700px at 20% 10%, var(--bg2), transparent 60%),
+                  radial-gradient(900px 600px at 90% 20%, #fff, transparent 55%),
+                  linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow:hidden;
+    }
+
+    /* floating hearts background */
+    .hearts {
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.75;
+      filter: blur(.2px);
+    }
+    .heart {
+      position:absolute;
+      font-size:18px;
+      animation: floatUp linear infinite;
+      opacity:.0;
+      transform: translateY(0) scale(1);
+    }
+    @keyframes floatUp{
+      0% { opacity:0; transform: translateY(50px) scale(.8); }
+      10% { opacity:.9; }
+      100% { opacity:0; transform: translateY(-120vh) scale(1.4); }
+    }
+
+    .card{
+      width:min(920px, 92vw);
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.55);
+      border-radius:28px;
+      box-shadow: var(--shadow);
+      padding:28px;
+      backdrop-filter: blur(10px);
+      position:relative;
+    }
+
+    .top{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:8px;
+      flex-wrap:wrap;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      background: linear-gradient(135deg, #fff, #fff0f7);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:999px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.07);
+      font-weight:650;
+    }
+    .badge .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(135deg, var(--pink), var(--pink2));
+      box-shadow: 0 0 0 6px rgba(255,61,127,.15);
+    }
+
+    h1{
+      margin:12px 0 6px 0;
+      text-align:center;
+      font-size: clamp(24px, 3.2vw, 44px);
+      line-height:1.08;
+      letter-spacing:-.02em;
+    }
+    p.sub{
+      margin:0 0 18px 0;
+      text-align:center;
+      font-size: clamp(14px, 1.8vw, 18px);
+      opacity:.85;
+    }
+
+    .name{
+      background: linear-gradient(135deg, var(--pink), #a100ff);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-weight:800;
+    }
+
+    .panel{
+      margin: 18px auto 0;
+      width:min(560px, 100%);
+      background: rgba(255,255,255,.75);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:22px;
+      padding:18px;
+      box-shadow: 0 14px 35px rgba(0,0,0,.08);
+      position:relative;
+    }
+
+    .question{
+      text-align:center;
+      font-weight:850;
+      font-size: clamp(20px, 2.4vw, 30px);
+      margin: 6px 0 16px;
+    }
+
+    .buttons{
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+      position:relative;
+      padding: 10px 0 4px;
+      min-height: 78px;
+    }
+
+    .btn{
+      border:0;
+      border-radius:999px;
+      padding: 14px 22px;
+      font-weight:800;
+      cursor:pointer;
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+      font-size: 18px;
+      user-select:none;
+    }
+
+    .btn-yes{
+      background: linear-gradient(135deg, var(--pink), var(--pink2));
+      color:white;
+      box-shadow: 0 16px 35px rgba(255,61,127,.35);
+    }
+    .btn-yes:hover{ transform: translateY(-2px) scale(1.03); }
+
+    .btn-no{
+      background: rgba(0,0,0,.06);
+      color: rgba(0,0,0,.75);
+      box-shadow: 0 10px 22px rgba(0,0,0,.08);
+      position:relative;
+    }
+    .btn-no:hover{ transform: translateY(-2px); }
+
+    .hint{
+      text-align:center;
+      margin-top:10px;
+      font-size: 13px;
+      opacity:.75;
+    }
+
+    .footer{
+      margin-top:14px;
+      text-align:center;
+      font-size:12px;
+      opacity:.7;
+    }
+
+    /* YES screen */
+    .yay{
+      display:none;
+      text-align:center;
+      padding: 14px 6px 6px;
+    }
+    .yay h2{
+      margin:0 0 8px 0;
+      font-size: clamp(26px, 4vw, 52px);
+      letter-spacing:-.02em;
+    }
+    .yay p{
+      margin: 0 auto 14px;
+      max-width: 42ch;
+      opacity:.9;
+      font-size: clamp(14px, 2vw, 18px);
+    }
+
+    .photo{
+      margin: 14px auto 6px;
+      width:min(360px, 72vw);
+      aspect-ratio: 1 / 1;
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow: 0 18px 55px rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.65);
+      background: #00000010;
+      position:relative;
+    }
+    .photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter:saturate(1.1) contrast(1.05);
+    }
+    .sparkle{
+      position:absolute;
+      inset:0;
+      background: radial-gradient(circle at 20% 30%, rgba(255,255,255,.35), transparent 40%),
+                  radial-gradient(circle at 80% 25%, rgba(255,255,255,.22), transparent 45%),
+                  radial-gradient(circle at 65% 80%, rgba(255,255,255,.18), transparent 50%);
+      mix-blend-mode: screen;
+      pointer-events:none;
+      animation: shimmer 2.8s ease-in-out infinite;
+    }
+    @keyframes shimmer{
+      0%,100%{ opacity:.55; transform: translateY(0); }
+      50%{ opacity:.9; transform: translateY(-6px); }
+    }
+
+    .tiny{
+      font-size:12px; opacity:.72; margin-top:8px;
+    }
+
+    /* confetti */
+    canvas#confetti{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <div class="hearts" id="hearts"></div>
+
+  <div class="card" id="card">
+    <div class="top">
+      <div class="badge"><span class="dot"></span> A message for <span class="name">Mar Surichaqui Castillon</span> 💘</div>
+    </div>
+
+    <h1>Mar Surichaqui Castillon,</h1>
+    <p class="sub">you’ve been living rent-free in my mind… so I built you a whole webpage 😌</p>
+
+    <div class="panel" id="panel">
+      <div class="question">Will you be my Valentine? 🥹💖</div>
+
+      <div class="buttons" id="buttons">
+        <button class="btn btn-yes" id="yesBtn">Yes 💞</button>
+        <button class="btn btn-no" id="noBtn">No</button>
+      </div>
+
+      <div class="hint" id="hint">Tip: “No” is a little shy today 😈</div>
+
+      <div class="yay" id="yay">
+        <h2>YAY!!! 🎉💘</h2>
+        <p>
+          You just made me the happiest person.
+          Now I owe you a date that feels like a movie.
+        </p>
+
+        <div class="photo">
+          <!-- Replace the image URL below with a photo of you two (or her favorite pic) -->
+          <img id="yayImg" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=900&q=80" alt="Love"/>
+          <div class="sparkle"></div>
+        </div>
+
+        <div class="tiny">P.S. Screenshot this and send it to me 😌</div>
+      </div>
+
+      <div class="footer">Made with courage, chaos, and love. 💗</div>
+    </div>
+  </div>
+
+  <script>
+    // --- Hearts background ---
+    const heartsWrap = document.getElementById('hearts');
+    const heartEmojis = ["💗","💖","💘","💝","💞","💕"];
+    function spawnHeart(){
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+      const left = Math.random()*100;
+      const dur = 6 + Math.random()*6;
+      const delay = Math.random()*1.5;
+      const size = 14 + Math.random()*18;
+      h.style.left = left + 'vw';
+      h.style.animationDuration = dur + 's';
+      h.style.animationDelay = delay + 's';
+      h.style.fontSize = size + 'px';
+      heartsWrap.appendChild(h);
+      setTimeout(()=>h.remove(), (dur+delay)*1000);
+    }
+    setInterval(spawnHeart, 280);
+
+    // --- No button shenanigans ---
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const hint = document.getElementById('hint');
+    const yay = document.getElementById('yay');
+    const buttons = document.getElementById('buttons');
+
+    let noCount = 0;
+    const noLines = [
+      "No seems a bit shy 😈",
+      "Try again 😌",
+      "Wrong answer (respectfully) 😤",
+      "Be serious, Mar 😭",
+      "Okay but… what if yes? 🥹",
+      "I’m gonna pretend I didn’t see that 🙈",
+      "My heart is buffering… 💔➡️💗",
+      "One more time and the button teleports 😈"
+    ];
+
+    function moveNoButton(){
+      // move within the buttons area
+      const rect = buttons.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+      const maxX = rect.width - btnRect.width;
+      const maxY = rect.height - btnRect.height;
+      const x = Math.max(0, Math.random()*maxX);
+      const y = Math.max(0, Math.random()*maxY);
+
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = x + 'px';
+      noBtn.style.top  = y + 'px';
+    }
+
+    // Make "No" dodge the cursor (fun + exciting)
+    noBtn.addEventListener('mouseenter', () => {
+      noCount++;
+      hint.textContent = noLines[Math.min(noCount-1, noLines.length-1)];
+      moveNoButton();
+
+      // Each time "No" is attempted, "Yes" grows slightly
+      const grow = 1 + Math.min(noCount, 10) * 0.06;
+      yesBtn.style.transform = `translateY(-2px) scale(${grow})`;
+      yesBtn.style.boxShadow = `0 16px 35px rgba(255,61,127,${0.25 + Math.min(noCount,10)*0.05})`;
+    });
+
+    // Also move on click, just in case
+    noBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      noCount++;
+      hint.textContent = "Nice try 😈";
+      moveNoButton();
+    });
+
+    // --- YES action ---
+    yesBtn.addEventListener('click', () => {
+      // hide question + buttons, show yay
+      document.querySelector('.question').style.display = 'none';
+      buttons.style.display = 'none';
+      hint.style.display = 'none';
+      yay.style.display = 'block';
+      popConfetti();
+    });
+
+    // --- Confetti (tiny canvas confetti) ---
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    let W, H;
+    function resize(){
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function popConfetti(){
+      const pieces = [];
+      const count = 220;
+
+      for(let i=0;i<count;i++){
+        pieces.push({
+          x: Math.random()*W,
+          y: -20 - Math.random()*H*0.2,
+          r: 2 + Math.random()*4,
+          vy: 2 + Math.random()*5,
+          vx: -2 + Math.random()*4,
+          a: Math.random()*Math.PI*2,
+          va: -0.15 + Math.random()*0.3,
+          life: 0,
+          maxLife: 140 + Math.random()*80
+        });
+      }
+
+      let frame = 0;
+      function tick(){
+        frame++;
+        ctx.clearRect(0,0,W,H);
+
+        for(const p of pieces){
+          p.life++;
+          p.x += p.vx;
+          p.y += p.vy;
+          p.a += p.va;
+
+          // slight gravity
+          p.vy += 0.02;
+
+          // wrap
+          if(p.x < -20) p.x = W+20;
+          if(p.x > W+20) p.x = -20;
+
+          // draw as little rectangles that spin
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.a);
+          ctx.globalAlpha = Math.max(0, 1 - p.life/p.maxLife);
+
+          // no hard-coded colors requirement doesn't apply here; but still, we can keep it simple:
+          // We'll derive a pink-ish palette via HSL randomization:
+          const hue = 320 + Math.random()*60; // pink to purple range
+          ctx.fillStyle = `hsl(${hue}, 90%, 70%)`;
+          ctx.fillRect(-p.r, -p.r, p.r*2.2, p.r*1.6);
+
+          ctx.restore();
+        }
+
+        const alive = pieces.some(p => p.life < p.maxLife && p.y < H+60);
+        if(alive && frame < 420) requestAnimationFrame(tick);
+        else ctx.clearRect(0,0,W,H);
+      }
+      tick();
+    }
+  </script>
+</body>
+</html>
